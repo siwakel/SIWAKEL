@@ -1,11 +1,21 @@
+:root{
+    --primary:#c1121f;
+    --secondary:#003049;
+    --background:#f8f9fa;
+}
+
 body{
-    background:#f5f7fb;
-    font-family:Arial, Helvetica, sans-serif;
+    background:var(--background);
+    font-family:'Segoe UI',sans-serif;
+}
+
+.navbar{
+    background:linear-gradient(90deg,var(--secondary),var(--primary));
 }
 
 .card{
     border:none;
-    border-radius:15px;
+    border-radius:18px;
     transition:.3s;
 }
 
@@ -13,7 +23,20 @@ body{
     transform:translateY(-8px);
 }
 
-.navbar-brand{
-    font-size:26px;
-    font-weight:bold;
+.sidebar{
+    background:#1d3557;
+    min-height:100vh;
+}
+
+.sidebar a{
+    color:white;
+    text-decoration:none;
+    display:block;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:8px;
+}
+
+.sidebar a:hover{
+    background:#457b9d;
 }
