@@ -59,7 +59,9 @@ Dashboard
 
 </thead>
 
-<tbody>
+<tbody id="dataSiswa">
+
+</tbody>
 
 <tr>
 
@@ -113,11 +115,39 @@ Hapus
 
 </tr>
 
+<tbody id="dataSiswa">
+
 </tbody>
 
 </table>
 
 </div>
+<script>
 
+let data = JSON.parse(localStorage.getItem("siswa")) || [];
+
+let tabel = "";
+
+data.forEach((item,index)=>{
+
+tabel += `
+<tr>
+<td>${index+1}</td>
+<td>${item.nama}</td>
+<td>${item.nis}</td>
+<td>${item.jk}</td>
+<td>${item.kelas}</td>
+<td>
+<button class="btn btn-warning btn-sm">Edit</button>
+<button class="btn btn-danger btn-sm">Hapus</button>
+</td>
+</tr>
+`;
+
+});
+
+document.getElementById("dataSiswa").innerHTML=tabel;
+
+</script>
 </body>
 </html>
