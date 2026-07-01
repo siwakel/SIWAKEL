@@ -63,90 +63,71 @@ Dashboard
 
 </tbody>
 
-<tr>
-
-<td>1</td>
-
-<td>Andi</td>
-
-<td>24001</td>
-
-<td>Laki-laki</td>
-
-<td>X TKJ 1</td>
-
-<td>
-
-<button class="btn btn-warning btn-sm">
-Edit
-</button>
-
-<button class="btn btn-danger btn-sm">
-Hapus
-</button>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>2</td>
-
-<td>Siti</td>
-
-<td>24002</td>
-
-<td>Perempuan</td>
-
-<td>X TKJ 1</td>
-
-<td>
-
-<button class="btn btn-warning btn-sm">
-Edit
-</button>
-
-<button class="btn btn-danger btn-sm">
-Hapus
-</button>
-
-</td>
-
-</tr>
-
-<tbody id="dataSiswa">
-
-</tbody>
-
 </table>
 
 </div>
 <script>
 
-let data = JSON.parse(localStorage.getItem("siswa")) || [];
+function tampilkanData(){
 
-let tabel = "";
+    let data = JSON.parse(localStorage.getItem("siswa")) || [];
 
-data.forEach((item,index)=>{
+    let tabel = "";
 
-tabel += `
-<tr>
-<td>${index+1}</td>
-<td>${item.nama}</td>
-<td>${item.nis}</td>
-<td>${item.jk}</td>
-<td>${item.kelas}</td>
-<td>
-<button class="btn btn-warning btn-sm">Edit</button>
-<button class="btn btn-danger btn-sm">Hapus</button>
-</td>
-</tr>
-`;
+    data.forEach((item,index)=>{
 
-});
+        tabel += `
+        <tr>
+            <td>${index+1}</td>
+            <td>${item.nama}</td>
+            <td>${item.nis}</td>
+            <td>${item.jk}</td>
+            <td>${item.kelas}</td>
+            <td>
+                <button class="btn btn-warning btn-sm"
+        onclick="editSiswa(${index})">
+    Edit
+</button>
 
-document.getElementById("dataSiswa").innerHTML=tabel;
+                <button class="btn btn-danger btn-sm"
+                    onclick="hapusSiswa(${index})">
+                    Hapus
+                </button>
+            </td>
+        </tr>
+        `;
+
+    });
+
+    document.getElementById("dataSiswa").innerHTML = tabel;
+
+}
+
+function hapusSiswa(index){
+
+    if(confirm("Yakin ingin menghapus data ini?")){
+
+        let data = JSON.parse(localStorage.getItem("siswa")) || [];
+
+        data.splice(index,1);
+
+        localStorage.setItem("siswa", JSON.stringify(data));
+
+        tampilkanData();
+
+    }
+
+}
+
+function editSiswa(index){
+
+    localStorage.setItem("editIndex", index);
+
+    window.location.href = "edit-siswa.html";
+
+}
+
+tampilkanData();
 
 </script>
 </body>

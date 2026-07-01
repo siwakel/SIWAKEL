@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Absensi Siswa</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+
+<h2>
+<i class="fa-solid fa-calendar-check"></i>
+Absensi Siswa
+</h2>
+
+<p id="tanggal"></p>
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-primary">
+
+<tr>
+<th>No</th>
+<th>Nama</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody id="dataAbsensi">
+
+</tbody>
+
+</table>
+
+<button class="btn btn-success" onclick="simpanAbsensi()">
+<i class="fa-solid fa-floppy-disk"></i>
+Simpan Absensi
+</button>
+
+<a href="dashboard.html" class="btn btn-secondary">
+Dashboard
+</a>
+
+</div>
+
+<script>
+
+let hariIni = new Date().toLocaleDateString('id-ID');
+
+document.getElementById("tanggal").innerHTML =
+"Tanggal : " + hariIni;
+
+let siswa = JSON.parse(localStorage.getItem("siswa")) || [];
+
+let html="";
+
+siswa.forEach((item,index)=>{
+
+html +=`
+
+<tr>
+
+<td>${index+1}</td>
+
+<td>${item.nama}</td>
+
+<td>
+
+<select class="form-select" id="status${index}">
+
+<option value="Hadir">Hadir</option>
+
+<option value="Izin">Izin</option>
+
+<option value="Sakit">Sakit</option>
+
+<option value="Alpha">Alpha</option>
+
+</select>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("dataAbsensi").innerHTML=html;
+
+function simpanAbsensi(){
+
+let data=[];
+
+siswa.forEach((item,index)=>{
+
+data.push({
+
+nama:item.nama,
+
+status:document.getElementById("status"+index).value
+
+});
+
+});
+
+localStorage.setItem("absensi",JSON.stringify(data));
+
+alert("Absensi berhasil disimpan.");
+
+}
+
+</script>
+
+</body>
+</html>
